@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace VendasWebMvcCore.Controllers
 {
     public class DepartamentosController : Controller
     {
-        public IActionResult Index()
+
+        private readonly IDepartamentoService _departamentoService;
+
+        public DepartamentosController(IDepartamentoService departamentoService)
         {
-            return View();
+            _departamentoService = departamentoService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var produtos = await _departamentoService.GetAllAsync();
+            return View(produtos);
         }
     }
 }
