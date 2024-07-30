@@ -1,0 +1,21 @@
+﻿
+@model IEnumerable<Application.DTOs.DepartamentoDto>
+
+<h2>Lista de Departamento</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var departamento in Model)
+        {
+            <tr>
+                <td>@departamento.Id</td>
+                <td>@departamento.Nome</td>
+            </tr>
+        }
+    </tbody>
+</table>

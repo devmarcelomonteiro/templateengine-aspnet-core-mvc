@@ -3,20 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace VendasWebMvcCore.Controllers
 {
-    public class DepartamentosController : Controller
+    public class DepartamentoController : Controller
     {
-
         private readonly IDepartamentoService _departamentoService;
 
-        public DepartamentosController(IDepartamentoService departamentoService)
+        public DepartamentoController(IDepartamentoService departamentoService)
         {
             _departamentoService = departamentoService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var produtos = await _departamentoService.GetAllAsync();
-            return View(produtos);
+            var departamentos = await _departamentoService.GetAllAsync();
+            return View(departamentos);
         }
     }
 }
