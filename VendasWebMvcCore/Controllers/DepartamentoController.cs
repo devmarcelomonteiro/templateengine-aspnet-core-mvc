@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.DTOs;
+using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace VendasWebMvcCore.Controllers
@@ -17,5 +18,22 @@ namespace VendasWebMvcCore.Controllers
             var departamentos = await _departamentoService.GetAllAsync();
             return View(departamentos);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(DepartamentoDto departamentoDto)
+        {
+            if (ModelState.IsValid)
+            {
+                await _departamentoService.AddAsync(departamentoDto);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(departamentoDto);
+        }
+
     }
 }

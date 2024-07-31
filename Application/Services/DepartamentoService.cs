@@ -1,5 +1,6 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
+using Domain.Entities;
 using Domain.Interface;
 
 namespace Application.Services
@@ -21,9 +22,13 @@ namespace Application.Services
         }
 
 
-        public Task AddAsync(DepartamentoDto departamentoDto)
+        public async Task AddAsync(DepartamentoDto departamentoDto)
         {
-            throw new NotImplementedException();
+            var departamento = new Departamento
+            {
+                Nome = departamentoDto.Nome
+            };
+            await _departamentoRepository.AddAsync(departamento);
         }
 
         public Task DeleteAsync(int id)

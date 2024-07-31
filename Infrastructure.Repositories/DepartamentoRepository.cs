@@ -21,24 +21,32 @@ namespace Infrastructure.Repositories
             return await _context.Departamentos.ToListAsync();
         }
 
-        public Task AddAsync(Departamento departamento)
+        public async Task AddAsync(Departamento departamento)
         {
-            throw new NotImplementedException();
+            await _context.AddAsync(departamento);
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var departamento = await _context.Departamentos.FindAsync(id);
+            if (departamento != null)
+            {
+                _context.Departamentos.Remove(departamento);
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public Task<Departamento> GetByIdAsync(int id)
+        public async Task<Departamento> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+
+            return await _context.Departamentos.FindAsync(id);
         }
 
-        public Task UpdateAsync(Departamento departamento)
+        public async Task UpdateAsync(Departamento departamento)
         {
-            throw new NotImplementedException();
+            _context.Departamentos.Update(departamento);
+            await _context.SaveChangesAsync();
         }
     }
 }
